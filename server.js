@@ -14,6 +14,9 @@ app.all('/proxy', async (req, res) => {
       url: url,
       data: req.body,
       headers: req.headers,
+      httpsAgent: new (require('https').Agent)({
+        rejectUnauthorized: false // Disable SSL verification (for testing only)
+      })
     });
     res.send(response.data);
   } catch (error) {
