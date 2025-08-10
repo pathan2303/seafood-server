@@ -8,14 +8,14 @@ app.use(cors()); // Enable CORS for all routes
 
 app.all('/proxy', async (req, res) => {
   try {
-    const url = 'https://script.google.com/macros/s/AKfycbxVhtPq8fvdCjRR00gf-EsyNAyI9ZQoHWqCrMiaXmJsliqL2o7j75A-AS3ij34Qsk0G/exec'; // Replace with your Apps Script URL
+    const url = 'https://script.google.com/macros/s/AKfycbxVhtPq8fvdCjRR00gf-EsyNAyI9ZQoHWqCrMiaXmJsliqL2o7j75A-AS3ij34Qsk0G/exec'; // Apps Script URL
     const response = await axios({
       method: req.method,
       url: url,
       data: req.body,
       headers: req.headers,
       httpsAgent: new (require('https').Agent)({
-        rejectUnauthorized: false // Disable SSL verification (for testing only)
+        rejectUnauthorized: false // Disable SSL verification for testing
       })
     });
     res.send(response.data);
